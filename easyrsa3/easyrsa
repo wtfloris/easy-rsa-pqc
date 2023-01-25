@@ -1665,7 +1665,9 @@ $EASYRSA_EXTRA_EXTS"
 	algo_opts=""
 	if [ "ed" = "$EASYRSA_ALGO" ]; then
 		algo_opts="$EASYRSA_CURVE"
-	else
+    elif [ "pqc" = "$EASYRSA_ALGO" ]; then
+        algo_opts="$EASYRSA_PQC_ALGO"
+    else
 		algo_opts="$EASYRSA_ALGO:$EASYRSA_ALGO_PARAMS"
 	fi
 
