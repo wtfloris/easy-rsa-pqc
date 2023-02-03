@@ -1479,14 +1479,14 @@ Please update openssl-easyrsa.cnf to the latest official release."
 				${out_key_pass_tmp:+ -pass file:"$out_key_pass_tmp"} \
 					|| die "Failed create CA private key"
 		;;
-        pqc)
-            easyrsa_openssl genpkey -algorithm "$EASYRSA_PQC_ALGO" \
-                -out "$out_key_tmp" \
+		pqc)
+			easyrsa_openssl genpkey -algorithm "$EASYRSA_PQC_ALGO" \
+				-out "$out_key_tmp" \
 				${cipher+ "$cipher"} \
 				${EASYRSA_PASSOUT:+ -pass "$EASYRSA_PASSOUT"} \
 				${out_key_pass_tmp:+ -pass file:"$out_key_pass_tmp"} \
 					|| die "Failed create CA private key"
-        ;; 
+		;; 
 		*)	die "Unknown algorithm: $EASYRSA_ALGO"
 		esac
 
@@ -1665,9 +1665,9 @@ $EASYRSA_EXTRA_EXTS"
 	algo_opts=""
 	if [ "ed" = "$EASYRSA_ALGO" ]; then
 		algo_opts="$EASYRSA_CURVE"
-    elif [ "pqc" = "$EASYRSA_ALGO" ]; then
-        algo_opts="$EASYRSA_PQC_ALGO"
-    else
+	elif [ "pqc" = "$EASYRSA_ALGO" ]; then
+		algo_opts="$EASYRSA_PQC_ALGO"
+	else
 		algo_opts="$EASYRSA_ALGO:$EASYRSA_ALGO_PARAMS"
 	fi
 
@@ -4310,8 +4310,8 @@ Failed to generate ecparam file (permissions?) at:
 			> /dev/null || die "\
 Edwards Curve $EASYRSA_CURVE not found."
 	;;
-    pqc)
-    ;;
+	pqc)
+	;;
 	*) die "\
 Alg '$EASYRSA_ALGO' is invalid: Must be 'rsa', 'ec' or 'ed'"
 	esac
@@ -4504,9 +4504,9 @@ Sourcing the vars file and building certificates will probably fail ..'
 	ed)
 		set_var EASYRSA_CURVE		ed25519
 	;;
-    pqc)
-    ;;
-    *) die "Unknown algorithm '$EASYRSA_ALGO'"
+	pqc)
+	;;
+	*) die "Unknown algorithm '$EASYRSA_ALGO'"
 	esac
 
 	set_var EASYRSA_CA_EXPIRE		3650
