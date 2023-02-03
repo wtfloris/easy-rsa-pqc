@@ -5,50 +5,24 @@ easy-rsa is a CLI utility to build and manage a PKI CA. In laymen's terms,
 this means to create a root certificate authority, and request and sign
 certificates, including intermediate CAs and certificate revocation lists (CRL).
 
-# Downloads
+This is a modified version that supports post-quantum cryptography.
 
-If you are looking for release downloads, please see the releases section on
-GitHub. Releases are also available as source checkouts using named tags.
+# Configuration and usage
 
-# Documentation
+Download and build the post-quantum OpenSSL library maintained by the Open Quantum Safe project: https://github.com/open-quantum-safe/openssl
 
-For 3.x project documentation and usage, see the [README.quickstart.md](README.quickstart.md) file or
-the more detailed docs under the doc/ directory. The .md files are in Markdown
-format and can be converted to html files as desired for release packages, or
-read as-is in plaintext.
+Initialize Easy-RSA as usual:
 
-# Getting help using easy-rsa
+```
+easy-rsa init-pki
+```
 
-Currently, Easy-RSA development co-exists with OpenVPN even though they are
-separate projects. The following resources are good places as of this writing to
-seek help using Easy-RSA:
+In your newly generated PKI structure, modify the `vars` file to use post-quantum cryptography:
 
-The [openvpn-users mailing list](https://lists.sourceforge.net/lists/listinfo/openvpn-users)
-is a good place to post usage or help questions.
+```
+set_var EASYRSA_OPENSSL    "openssl"    # Set your compiled Open Quantum Safe OpenSSL binary here
+set_var EASYRSA_ALGO       pqc
+set_var EASYRSA_PQC_ALGO   dilithium3   # Set this to any supported PQC algorithm
+```
 
-You can also try libera.chat IRC network, in channels #openvpn for general support or #easyrsa for development discussion.
-
-# Branch structure
-
-The easy-rsa master branch is currently tracking development for the 3.x release
-cycle. Please note that, at any given time, master may be broken. Feel free to
-create issues against master, but have patience when using the master branch. It
-is recommended to use a release, and priority will be given to bugs identified in
-the most recent release.
-
-The prior 2.x and 1.x versions are available as release branches for
-tracking and possible back-porting of relevant fixes. Branch layout is:
-
-    master         <- 3.1, at present
-    v3.x.x            pre-release branches, used for staging branches
-    release/3.0       v3.0.x bugfix/security/openssl updates
-    release/2.x
-    release/1.x
-
-LICENSING info for 3.x is in the [COPYING.md](COPYING.md) file
-
-# Code style, standards
-
-We are attempting to adhere to the POSIX standard, which can be found here:
-
-https://pubs.opengroup.org/onlinepubs/9699919799/
+Build your CA as normal with `build-ca` and you have initialized a post-quantum certificate authority! Request and/or sign all the certificates your heart desires.
