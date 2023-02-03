@@ -126,12 +126,17 @@ fi
 #  * rsa
 #  * ec
 #  * ed
+#  * pqc
 #
 #set_var EASYRSA_ALGO		rsa
 
 # Define the named curve, used in ec & ed modes:
 #
 #set_var EASYRSA_CURVE		secp384r1
+
+# Define the PQC algorithm, used in pqc mode
+#
+#set_var EASYRSA_PQC_ALGO   dilithium3
 
 # In how many days should the root CA key expire?
 #
